@@ -27,7 +27,7 @@
       <form action="/post_login" method="post">
         {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="NIP" name="nip" required>
+          <input type="text" class="form-control" placeholder="username" name="username" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -59,16 +59,7 @@
         </div>
       </form>
 
-      <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div>
-      <!-- /.social-auth-links -->
+     
 
       <p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>

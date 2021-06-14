@@ -188,35 +188,33 @@
             </a>
           </li>
           
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Surat
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/surat_masuk" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Surat Masuk</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/surat_keluar" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Surat Keluar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          
-          
-          
+          @if (Auth()->user()->roles == "operator_surat")
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Surat
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/surat_masuk" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Surat Masuk</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/surat_keluar" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Surat Keluar</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          @endif
          
         </ul>
       </nav>
