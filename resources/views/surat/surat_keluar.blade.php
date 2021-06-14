@@ -67,6 +67,11 @@
 @endsection
 
 @section('content')
+@if (session('error'))
+  <div class="alert alert-danger" role="alert">
+    {{session('error')}}
+  </div>
+@endif
 <div class="card">
     <div class="card-header">
       <h3 class="card-title">Surat Keluar </h3>
@@ -78,6 +83,7 @@
       </div>
     </div>
     <!-- /.card-header -->
+    
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped">
         <thead>

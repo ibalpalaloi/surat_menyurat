@@ -31,7 +31,7 @@
             <div class="form-group">
               <label>Date:</label>
                 <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                    <input name="tgl_masuk" type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                    <input required name="tgl_masuk" type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
                     <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
@@ -41,7 +41,7 @@
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-2 col-form-label">Perihal</label>
               <div class="col-sm-10">
-                <textarea name="perihal" id="" cols="30" rows="10" class="form-control"></textarea>
+                <textarea required name="perihal" id="" cols="30" rows="10" class="form-control"></textarea>
               </div>
             </div>
 
@@ -67,6 +67,12 @@
 @endsection
 
 @section('content')
+@if (session('error'))
+  <div class="alert alert-danger" role="alert">
+    {{session('error')}}
+  </div>
+@endif
+
 <div class="card">
     <div class="card-header">
       <h3 class="card-title">Surat Masuk </h3>
