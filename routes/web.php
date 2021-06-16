@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SuratController;
-
+use App\Http\Controllers\SuratTugasController;
+use App\Http\Controllers\TugasController;
+use App\Http\Controllers\TugasAsnController;
+// use DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +21,31 @@ use App\Http\Controllers\SuratController;
 
 Route::get('/', function () {
     // return view('welcome');
-    return redirect('/login');
+	$opd = DB::table('opd')->select()->first();
+	if ($opd){
+		return redirect('/login');
+	}
+	else {
+		return redirect('/create-opd');
+	}
 });
 
+Route::post('/pilih-opd', [AuthController::class, 'pilih_opd']);
+Route::get('/create-opd', [AuthController::class, 'create_opd']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
+
+// sura tugas - asn
+Route::get('/surat-tugas/{id}/asn', [TugasAsnController::class, 'index']);
+
+// surat tugas - tugas
+Route::delete('/surat-tugas/{id}/tugas/delete', [TugasController::class, 'delete']);
+Route::post('/surat-tugas/{id}/tugas/update', [TugasController::class, 'update']);
+Route::post('/surat-tugas/{id}/tugas/store', [TugasController::class, 'store']);
+Route::get('/surat-tugas/{id}/tugas', [TugasController::class, 'index']);
+Route::post('/surat-tugas/store', [SuratTugasController::class, 'store']);
+Route::get('/surat-tugas', [SuratTugasController::class, 'index']);
 // surat
 Route::get('/surat_masuk', [SuratController::class, 'surat_masuk']);
 Route::get('/surat_keluar', [SuratController::class, 'surat_keluar']);

@@ -213,6 +213,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="<?=url('/')?>/surat-tugas" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Surat Tugas
+              </p>
+            </a>
+          </li>
 
           
           
