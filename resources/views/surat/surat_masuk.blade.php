@@ -4,6 +4,7 @@
     <!-- DataTables -->
   <link rel="stylesheet" href="<?=url('/')?>/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?=url('/')?>/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet"/>
 
 @endsection
 
@@ -15,7 +16,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">TAMBAH SURAT MASUK</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -28,20 +29,17 @@
                 <input name="no_surat" type="text" class="form-control" id="inputEmail3" placeholder="Nomor Surat" required>
               </div>
             </div>
-            <div class="form-group">
-              <label>Date:</label>
-                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                    <input name="tgl_masuk" type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Tgl Masuk</label>
+              <div class="col-sm-10">
+                <input name="tgl_masuk" type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
+              </div>
             </div>
             
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-2 col-form-label">Perihal</label>
               <div class="col-sm-10">
-                <textarea name="perihal" id="" cols="30" rows="10" class="form-control"></textarea>
+                <textarea required name="perihal" id="" cols="30" rows="10" class="form-control"></textarea>
               </div>
             </div>
 
@@ -67,6 +65,12 @@
 @endsection
 
 @section('content')
+@if (session('error'))
+  <div class="alert alert-danger" role="alert">
+    {{session('error')}}
+  </div>
+@endif
+
 <div class="card">
     <div class="card-header">
       <h3 class="card-title">Surat Masuk </h3>
@@ -120,7 +124,7 @@
 <script src="<?=url('/')?>/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?=url('/')?>/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?=url('/')?>/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(function () {
         $("#example1").DataTable({
@@ -138,7 +142,10 @@
         });
     });
 </script>
-<script type="text/javascript">
+<script>
+  $('#datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+  });
 </script>
   
 

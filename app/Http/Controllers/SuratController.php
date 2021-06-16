@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Surat_masuk;
 use App\Models\Surat_keluar;
+use Illuminate\Support\Facades\Validator;
 use File;
 
 class SuratController extends Controller
@@ -16,6 +17,16 @@ class SuratController extends Controller
     }
 
     public function post_surat_masuk(Request $request){
+        $validator = Validator::make($request->all(),[
+            'file' => 'mimes:pdf, PDF',
+        ]);
+        if($validator->fails()){
+            return back()->with('error', 'File dalam bentuk PDF');
+        }
+        $cek_surat = Surat_masuk::where('nomor_surat', $request->no_surat)->get();
+        if(count($cek_surat) > 0){
+            return back()->with('error', 'nomor surat telah tersedia');
+        }
         $surat = new Surat_masuk;
         $surat->nomor_surat = $request->no_surat;
         $surat->tgl_masuk = $request->tgl_masuk;
@@ -34,6 +45,16 @@ class SuratController extends Controller
     }
 
     public function post_surat_keluar(Request $request){
+        $validator = Validator::make($request->all(),[
+            'file' => 'mimes:pdf, PDF',
+        ]);
+        if($validator->fails()){
+            return back()->with('error', 'File dalam bentuk PDF');
+        }
+        $cek_surat = Surat_keluar::where('nomor_surat', $request->no_surat)->get();
+        if(count($cek_surat) > 0){
+            return back()->with('error', 'nomor surat telah tersedia');
+        }
         $surat = new Surat_keluar;
         $surat->nomor_surat = $request->no_surat;
         $surat->tgl_keluar = $request->tgl_keluar;

@@ -22,7 +22,6 @@
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?=url('/')?>/AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?=url('/')?>/AdminLTE/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?=url('/')?>/AdminLTE/plugins/summernote/summernote-bs4.min.css">
 
@@ -188,32 +187,33 @@
             </a>
           </li>
           
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Surat
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/surat_masuk" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Surat Masuk</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/surat_keluar" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Surat Keluar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
+          @if (Auth()->user()->roles == "operator_surat")
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Surat
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/surat_masuk" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Surat Masuk</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/surat_keluar" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Surat Keluar</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
             <a href="<?=url('/')?>/surat-tugas" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -222,9 +222,7 @@
             </a>
           </li>
 
-          
-          
-          
+          @endif
          
         </ul>
       </nav>
@@ -293,9 +291,6 @@
 <script src="<?=url('/')?>/AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?=url('/')?>/AdminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?=url('/')?>/AdminLTE/plugins/moment/moment.min.js"></script>
-<script src="<?=url('/')?>/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="<?=url('/')?>/AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
