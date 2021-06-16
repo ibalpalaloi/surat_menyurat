@@ -14,7 +14,6 @@ class SuratTugasController extends Controller
 		$link = env("API_SMARTASN");
 		$response = Http::get($link.'/api/surat-tugas')->json();
 		$surat_tugas = $response['surat_tugas'];
-		// dd($surat_tugas);
 		return view('users/admin/surat_tugas/index', compact('surat_tugas'));
 	}
 
