@@ -17,14 +17,14 @@
         {{csrf_field()}}
         <div class="modal-body">
           <div class="text-center" style="display: flex; flex-direction: column; justify-content: center; align-content: center;">
-            <div style="width: 100%;"><h4 class="card-title" style="width: 100%; text-align: center; margin-bottom: 1em;">Masukan data Instansi</h4></div>
+            <div style="width: 100%;"><h4 class="card-title" style="width: 100%; text-align: center; margin-bottom: 1em;">Tugas Baru</h4></div>
             <div><i class="fas fa-user fa-4x mb-3 "></i></div>
           </div>
           <div class="row">
             <div class="col-12">
               <div class="form-group">
                 <label for="nama_jenis_proyek">Tugas</label>
-                <textarea class="form-control" id="nama" name="nama" required placeholder="Nomor Surat" rows="3"></textarea>
+                <textarea class="form-control" id="nama" name="tugas" required placeholder="Nomor Surat" rows="3"></textarea>
               </div>
 
             </div>
@@ -46,7 +46,7 @@
         {{csrf_field()}}
         <div class="modal-body">
           <div class="text-center" style="display: flex; flex-direction: column; justify-content: center; align-content: center;">
-            <div style="width: 100%;"><h4 class="card-title" style="width: 100%; text-align: center; margin-bottom: 1em;">Masukan data Instansi</h4></div>
+            <div style="width: 100%;"><h4 class="card-title" style="width: 100%; text-align: center; margin-bottom: 1em;">Ubah Tugas</h4></div>
             <div><i class="fas fa-user fa-4x mb-3 "></i></div>
           </div>
           <div class="row">
@@ -88,7 +88,7 @@
                 <form action="{{url()->current()}}/delete" method="POST">
                     @csrf
                     @method('DELETE')
-                    <input type="hidden" name="id" id="id_hapus" required>
+                    <input hidden name="id" id="id_hapus" required>
                     <button type="submit" class="btn btn-danger">Hapus</button>
                 </form>
 
@@ -129,7 +129,7 @@
         @foreach ($tugas as $row)
         <tr>
           <td>{{$loop->iteration}}</td>
-          <td>{{$row->nama}}</td>
+          <td>{{$row['nama']}}</td>
           <td>
             <div class="btn-group">
               <button type="button" class="btn btn-info">Action</button>
@@ -137,9 +137,9 @@
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <div class="dropdown-menu" role="menu" style="">
-                <div class="dropdown-item" onclick='ubah_data("{{$row->id}}", "{{$row->nama}}")'>Ubah</div>
+                <div class="dropdown-item" onclick="ubah_data('{{$row['id']}}', '{{$row['nama']}}')">Ubah</div>
                 <div class="dropdown-divider"></div>
-                <div class="dropdown-item" onclick='hapus_data("{{$row->id}}")' href="#">Hapus</div>
+                <div class="dropdown-item" onclick="hapus_data('{{$row['id']}}')" href="#">Hapus</div>
               </div>
             </div>
           </td>

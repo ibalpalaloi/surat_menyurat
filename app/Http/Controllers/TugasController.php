@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tugas;
+use Illuminate\Support\Facades\Http;
 use DB;
 use File;
 
@@ -11,30 +12,38 @@ class TugasController extends Controller
 {
     //
     public function index($id){
-    	$tugas = DB::table('tugas')->select('*')->get();
-    	// dd($tugas);	
+    	$link = env('API_SMARTASN');
+		$response = Http::get($link.'/api/tugas_surat_tugas',[
+			'id_surat' => $id
+		])->json();
+    	$tugas = $response['tugas'];
     	return view('users/admin/surat_tugas/tugas/index', compact('tugas'));
     }
 
     public function store($id, Request $request){
-    	$db = new Tugas;
-		$db->id = $this->autocode('TGS');
-		$db->nama = $request->nama;
-		$db->id_surat = $id;
-		$db->save();
+    	$link = env('API_SMARTASN');
+		$response = Http::get($link.'/api/tambah_tugas_surat_tugas', [
+			'id_surat_tugas' => $id,
+			'tugas' => $request->tugas
+		])->json();
 		return back();
     }
 
     public function update(Request $request){
-    	$db = Tugas::where('id', $request->id)->first();
-		$db->nama = $request->nama;
-		$db->save();
+    	$link = env('API_SMARTASN');
+		$response = Http::get($link.'/api/ubah_tugas_surat_tugas', [
+			'id_tugas' => $request->id,
+			'tugas' => $request->nama
+		])->json();
 		return back();
     }
 
     public function delete(Request $request){
-    	DB::table('tugas')->where('id', $request->id)->delete();
-    	return back();
+    	$link = env('API_SMARTASN');
+		$response = Http::get($link.'/api/hapus_tugas_surat_tugas', [
+			'id_tugas' => $request->id,
+		])->json();
+		return back();
     }
 
 	public function autocode($kode){

@@ -104,7 +104,7 @@
 @section('content')
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">Data Admin </h3>
+    <h3 class="card-title">Data ASN Bertugas </h3>
 
     <div class="card-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
@@ -118,7 +118,9 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Tugas</th>
+          <th>Nama</th>
+          <th>Bidang</th>
+          <th>Sub Bidang</th>
           <th></th>
         </tr>
       </thead>
@@ -126,10 +128,11 @@
         @php
         $no = 1;
         @endphp
-        @foreach ($tugas_asn as $row)
         <tr>
-          <td>{{$loop->iteration}}</td>
-          <td>{{$row->nama}}</td>
+          <td>1</td>
+          <td>Nama</td>
+          <td>Bidang</td>
+          <td>Sub Bidang</td>
           <td>
             <div class="btn-group">
               <button type="button" class="btn btn-info">Action</button>
@@ -137,14 +140,13 @@
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <div class="dropdown-menu" role="menu" style="">
-                <div class="dropdown-item" onclick='ubah_data("{{$row->id}}", "{{$row->nama}}")'>Ubah</div>
+                <div class="dropdown-item" onclick='ubah_data("", "")'>Ubah</div>
                 <div class="dropdown-divider"></div>
-                <div class="dropdown-item" onclick='hapus_data("{{$row->id}}")' href="#">Hapus</div>
+                <div class="dropdown-item" onclick='hapus_data("")' href="#">Hapus</div>
               </div>
             </div>
           </td>
         </tr>
-        @endforeach
       </tbody>
     </table>
   </div>
