@@ -48,6 +48,7 @@ Route::post('/surat-tugas/{id}/tugas/store', [TugasController::class, 'store']);
 Route::get('/surat-tugas/{id}/tugas', [TugasController::class, 'index']);
 Route::post('/surat-tugas/store', [SuratTugasController::class, 'store']);
 Route::get('/surat-tugas', [SuratTugasController::class, 'index']);
+Route::post('/surat_tugas/{id}/post_asn_bertugas', [SuratTugasController::class, 'post_asn_bertugas']);
 
 Route::group(['middleware'=>'auth'], function(){
 

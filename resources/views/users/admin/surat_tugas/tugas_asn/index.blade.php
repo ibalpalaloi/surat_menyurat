@@ -8,94 +8,50 @@
 @endsection
 
 @section('modal')
-{{-- modal --}}
-<!-- Large modal -->
-<div class="modal fade" id="modal-tambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <form class="striped-rows" enctype="multipart/form-data" action="{{url()->current()}}/store" method="post">
-        {{csrf_field()}}
-        <div class="modal-body">
-          <div class="text-center" style="display: flex; flex-direction: column; justify-content: center; align-content: center;">
-            <div style="width: 100%;"><h4 class="card-title" style="width: 100%; text-align: center; margin-bottom: 1em;">Masukan data Instansi</h4></div>
-            <div><i class="fas fa-user fa-4x mb-3 "></i></div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="form-group">
-                <label for="nama_jenis_proyek">Tugas</label>
-                <textarea class="form-control" id="nama" name="nama" required placeholder="Nomor Surat" rows="3"></textarea>
-              </div>
 
-            </div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_pilih_asn">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/surat_tugas/{{$id}}/post_asn_bertugas" method="post">
+        {{ csrf_field() }}
+        <div class="modal-body">
+          <input type="text" name="id_asn" id="id_asn" hidden>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Nama ASN</label>
+            <select name="" class="form-control" id="nama_asn">
+              <option value="">Pilih ASN</option>
+              @php
+                  $no=0;
+              @endphp
+              @foreach ($data_asn as $data)
+
+                <option value="{{$no++}}">{{$data['nama']}}</option>
+
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Bidang</label>
+            <input name="" type="text" class="form-control" id="bidang" placeholder="Bidang" readonly>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Sub_bidang</label>
+            <input type="text" class="form-control" id="sub_bidang" placeholder="Sub Bidang" readonly>
           </div>
         </div>
-        <div class="modal-footer justify-content-between ">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-dark">Simpan</button>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
     </div>
   </div>
-</div>
-
-<div class="modal fade" id="modal-ubah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <form class="striped-rows" enctype="multipart/form-data" action="{{url()->current()}}/update" method="post">
-        {{csrf_field()}}
-        <div class="modal-body">
-          <div class="text-center" style="display: flex; flex-direction: column; justify-content: center; align-content: center;">
-            <div style="width: 100%;"><h4 class="card-title" style="width: 100%; text-align: center; margin-bottom: 1em;">Masukan data Instansi</h4></div>
-            <div><i class="fas fa-user fa-4x mb-3 "></i></div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="form-group">
-                <label for="nama_jenis_proyek">Tugas</label>
-                <input type="text" name="id" id="ubah_id" hidden>
-                <textarea class="form-control" id="ubah_nama" name="nama" required placeholder="Nomor Surat" rows="3"></textarea>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer justify-content-between ">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-dark">Simpan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <!--Content-->
-        <div class="modal-content">
-            <!--Body-->
-            <div class="modal-body">
-                <div class="text-center">
-                    <i class="fas fa-trash fa-4x mb-3 "></i>
-                    <h4>Apakah Yakin Ingin Menghapus Kategori Ini ?
-                    </h4>
-
-                </div>
-            </div>
-
-            <div class="modal-footer justify-content-between ">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <form action="{{url()->current()}}/delete" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="id" id="id_hapus" required>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                </form>
-
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
 </div>
 
 @endsection
@@ -108,7 +64,7 @@
 
     <div class="card-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
-        <div onclick="tambah_asn()" class="btn btn-primary">Tambah ASN</div>
+        <div onclick="tambah_asn()" class="btn btn-primary" data-toggle="modal" data-target="#modal_pilih_asn">Tambah ASN</div>
       </div>
     </div>
   </div>
@@ -128,11 +84,12 @@
         @php
         $no = 1;
         @endphp
+        @foreach ($asn as $data)
         <tr>
-          <td>1</td>
-          <td>Nama</td>
-          <td>Bidang</td>
-          <td>Sub Bidang</td>
+          <td>{{$no++}}</td>
+          <td>{{$data['nama']}}</td>
+          <td>{{$data['bidang']}}</td>
+          <td>{{$data['sub_bidang']}}</td>
           <td>
             <div class="btn-group">
               <button type="button" class="btn btn-info">Action</button>
@@ -146,7 +103,8 @@
               </div>
             </div>
           </td>
-        </tr>
+        </tr>  
+        @endforeach
       </tbody>
     </table>
   </div>
@@ -192,6 +150,16 @@
     $("#id_hapus").val(id);
     $("#modal-hapus").modal('show');
   }
+</script>
+<script>
+  $('#nama_asn').change(function(){
+    var index = $(this).val();
+    var data_asn = <?php echo json_encode($data_asn)?>;
+    console.log(data_asn[index]);
+    $('#bidang').val(data_asn[index]['bidang']);
+    $('#sub_bidang').val(data_asn[index]['sub_bidang']);
+    $('#id_asn').val(data_asn[index]['id']);
+  })
 </script>
 
 

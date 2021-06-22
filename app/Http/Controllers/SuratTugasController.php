@@ -50,4 +50,14 @@ class SuratTugasController extends Controller
 		$current_date = date('mdYs'.$random, $timestamp); 
 		return $kode."-".$current_date;
 	}  
+
+	public function post_asn_bertugas($id, Request $request){
+		$link = env("API_SMARTASN");
+		$response = Http::post($link.'/api/post_asn_bertugas', [
+			'id_asn' => $request->id_asn,
+			'id_surat'=>$id
+		])->json();
+
+		return back();
+	}
 }
